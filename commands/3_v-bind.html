@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+  .red {
+    color: rgb(27, 94, 196);
+  }
+  .green {
+    color: green;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-bind动态绑定属性，如class，绑定的内容为绑定变量的值, 简写： -->
+    <p v-bind:class="{red: isRed, green: isGreen}">我是一段文字内容</p><br>
+    <button @click="change">变色</button>
+    <!-- v-bind绑定style，js写法样式的key用小驼峰形式 -->
+    <p :style="{fontSize: f50, color: textRed}">我是一段文字内容</p>
+
+  </div>
+  <script src="../js/vue3.js"></script>
+  <script>
+  const app = Vue.createApp({
+    data() {
+        return {
+          textRed: "rgb(27, 94, 196)",
+          textGreen: "green",
+          f50: "50px",
+          isRed: true,
+          isGreen: false
+        }
+    },
+    methods: {
+      change() {
+        this.isRed=!this.isRed
+        this.isGreen=!this.isGreen     
+      }
+    }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

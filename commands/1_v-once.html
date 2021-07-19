@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <span>{{ msg }}</span><br>
+    <!-- 使用v-once指令的插值后，数据将不再改变 -->
+    <span v-once>{{ message }}</span>
+
+  </div>
+  <script src="../js/vue3.js"></script>
+  <script>
+  const app = Vue.createApp({
+    data() {
+        return {
+          msg: "no-v-once",
+          message: "v-once"
+        }
+    },
+    methods: {}
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
