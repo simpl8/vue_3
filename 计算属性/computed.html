@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    table, td, th {
+    border: 1px solid gray;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <table class="goods">
+      <tr>
+        <td>名称</td>
+        <td>价格</td>
+        <td>操作</td>
+      </tr>
+      <tr v-for="(item,index) in fruits">
+        <td>{{item.name}}</td>
+        <td>{{item.price}}</td>
+        <td>
+          <button @click="decrease(index)" :disabled="item.isDisabled">-</button>
+          {{item.count}}
+          <button  @click="increase(index)">+</button>
+        </td>
+      </tr>
+      <tr>
+        <td>总价</td>
+        <!-- 计算属性，实现方式和方法一样，调用的时候不用()进行调用，一半只实现了getter方法，不实现setter方法 -->
+        <!-- 计算属性和方法的区别：计算属性会进行缓存，而方法会调用多次消耗性能 -->
+        <td>{{total}}</td>
+        <td>
+          <button @click="clear()">清空</button>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <script src="../js/vue3.js"></script>
+  <script>
+  const app = Vue.createApp({
+    data() {
+        return {
+          fruits: [
+            {name: "apple", price: 20, count: 1, isDisabled: false},
+            {name: "watermelon", price: 30, count: 1, isDisabled: false},
+            {name: "banana", price: 10, count: 1, isDisabled: false}
+          ]
+        }
+    },
+    methods: {
+      decrease(index) {
+        console.log(index);
+        this.fruits[index].count --
+        if (this.fruits[index].count == 0){
+          this.fruits[index].isDisabled = true
+        }
+      },
+      increase(index) {
+        console.log(index)
+        this.fruits[index].isDisabled = false
+        return this.fruits[index].count ++
+      },
+      clear() {
+        for (item of this.fruits) {
+          item.count = 0
+          item.isDisabled = true
+        }
+      }
+    },
+    computed: {
+      total() {
+        let sum = 0
+        for (item of this.fruits) {
+          sum += item.price * item.count
+        }
+        return sum
+
+      }
+    }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

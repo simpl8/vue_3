@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style text="text/css">
+  .box {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 阻止冒泡事件 -->
+    <div class="box" @click="boxClick()">
+      <div>
+        <!-- .stop阻止事件冒泡 -->
+        <button @click.stop="btnClick()">按钮点击</button> 
+      </div>
+    </div>
+    <div>
+      <!-- .prevent阻止默认事件，只处理自定义事件 -->
+      <a href="http://www.baidu.com" @click.prevent="aClick()">点击a标签</a>
+    </div>
+    <div>
+      <!-- 绑定键盘按键 -->
+      <input type="text" @keyup.enter="enter">
+    </div>
+
+  </div>
+  <script src="../js/vue3.js"></script>
+  <script>
+  const app = Vue.createApp({
+    data() {
+        return {}
+    },
+    methods: {
+      boxClick() {
+        console.log("点击了box")
+      },
+      btnClick() {
+        console.log("点击了btn")  
+      },
+      aClick() {
+        console.log("阻止跳转百度，执行自定义click事件")
+      },
+      enter(){
+        alert("enter")
+      }
+    }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
