@@ -8,25 +8,59 @@
   <title>Document</title>
   <style type="text/css">
     .login {
-      
+      height: 200px;
+      width: 200px;
+      border: 1px solid gray;
+      padding: 2mm 2mm 2mm 2mm
+    }
+    input, button, label {
+      margin: 2px;
+    }
+    [v-cloak] {
+      display: none
     }
   </style>
 </head>
 
 <body>
   <div id="app">
-    <div class="login">
-
+    <div class="login" v-cloak>
+      <div v-if="isLogin">
+        <label for="username">用户名</label><br>
+        <input type="text" placeholder="请输入用户名或邮箱"><br>
+        <label for="password">密码</label><br>
+        <input type="password" placeholder="请输入密码"><br>
+        <input type="submit" value="登录">
+        <button @click="goToRegist">去注册</button>
+      </div>
+      <div v-else>
+        <label for="username">用户名</label><br>
+        <input type="text" placeholder="请输入用户名或邮箱"><br>
+        <label for="password">密码</label><br>
+        <input type="password" placeholder="请输入密码"><br>
+        <input type="submit" value="注册">
+        <button @click="goToLogin">去登录</button>
+      </div>
     </div>
+    <div v-else></div>
 
   </div>
   <script src="../js/vue3.js"></script>
   <script>
   const app = Vue.createApp({
     data() {
-        return {}
+        return {
+          isLogin: true
+        }
     },
-    methods: {}
+    methods: {
+      goToRegist() {
+        return this.isLogin = !this.isLogin
+      },
+      goToLogin() {
+        return this.isLogin = !this.isLogin
+      }
+    }
     }).mount('#app')
   </script>
 </body>

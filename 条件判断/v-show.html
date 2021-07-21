@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-show只是简单的切换元素的css property display，会始终渲染保留再DOM中，非常频繁的切换时用v-show更好，只在初始化时有更高的渲染开销，切换开销比v-if小-->
+    <div v-show="isShow">显示</div>
+    <button @click="show">切换</button>
+  </div>
+  <script src="../js/vue3.js"></script>
+  <script>
+  const app = Vue.createApp({
+    data() {
+        return {
+          isShow: false
+        }
+    },
+    methods: {
+      show() {
+        return this.isShow = !this.isShow
+      }
+    }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
