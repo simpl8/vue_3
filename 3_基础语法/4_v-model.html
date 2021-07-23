@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <label for="abc">
+      <!-- 基础使用 -->
+      <input type="text" v-model="msg">
+    </label>
+    <h2>{{ msg }}</h2>
+    <p>=======================</p>
+    <!-- v-model原理 -->
+    <label for="adc">
+      <!-- @input监听输入框的输入 -->
+      <input type="text" @input="msg2=$event.target.value" :value="msg2">
+    </label>
+    <h2>{{msg2}}</h2>
+  </div>
+  <script src="../js/vue3.js"></script>
+  <script>
+  const app = Vue.createApp({
+    data() {
+        return {
+          msg: "测试",
+          msg2: "test"
+        }
+    },
+    methods: {}
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
