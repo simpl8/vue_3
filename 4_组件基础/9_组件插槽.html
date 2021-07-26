@@ -1,0 +1,50 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <it-box>
+        <!-- 放入插槽中的内容 -->
+        <a href="http://www.baidu.com">百度一下</a>
+      </it-box>
+      <it-box>
+        <a href="http://www.taobao.com">淘宝商城</a>
+      </it-box>
+      <it-box></it-box>
+    </div>
+    <template id="it_box">
+      <div style="height: 200px;width: 200px;background-color: coral;">
+        <h1>{{msg}}</h1>
+        <!-- 预留插槽 -->
+        <slot>默认内容</slot>
+      </div>
+    </template>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const Box = {
+        data() {
+          return {
+            msg: "我是组件"
+          }
+        },
+        template: '#it_box',
+      }
+      const app = Vue.createApp({
+        data() {
+          return {}
+        },
+        methods: {},
+        components: {
+          "it-box": Box
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

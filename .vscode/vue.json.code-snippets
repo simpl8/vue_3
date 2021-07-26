@@ -1,0 +1,30 @@
+{
+	"Print to console": {
+	  "prefix": "vue",
+	  "body": [
+		"<html>\n",
+		"  <head>",
+				"\t\t<meta charset='UTF-8'>",
+				"\t\t<title></title>",
+				"\t\t<style type='text/css'>",
+				
+				"\t\t</style>",
+		"  </head>\n",
+		"  <body>",
+			   "\t\t<div id='app'>",
+				 		
+				 "\t\t</div>",
+		"\t\t<script src='../js/vue3.js'></script>",
+		"\t\t<script>",
+		"\t\t\tconst app = Vue.createApp({",
+		     "\t\t\t\tdata() {",
+						"\t\t\t\t\treturn {}",
+				 "\t\t\t\t},",
+				 "\t\t\t\tmethods: {}",
+		"\t\t\t}).mount('#app')",
+		"\t\t</script>",
+		"\t</body>\n",
+		"</html>",
+						],
+	}
+}

@@ -1,0 +1,53 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <it-box ref="box1"></it-box>
+      <button @click="getChildComponent()">获取子组件</button>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const Box = {
+        data() {
+          return {
+            msg: '是苏杭啊'
+          }
+        },
+        methods: {
+          btnClick() {
+            alert("点击")
+          }
+        },
+        template: `
+          <div style="height: 300px;width: 300px;background-color: coral;">
+            <h1>我是子组件</h1>
+            <button @click="btnClick()">子组件按钮点击</button>
+          </div>
+        `
+      }
+      const app = Vue.createApp({
+        data() {
+          return {}
+        },
+        methods: {
+          //获取子组件
+          getChildComponent() {
+            console.log(this.$refs.box1.msg) // 拿到子组件的msg内容
+            this.$refs.box1.btnClick() // 出发子组件的btnClick方法
+          }
+        },
+        components: {
+          "it-box": Box
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

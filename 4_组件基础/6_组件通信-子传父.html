@@ -1,0 +1,53 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <it-box @box-click="boxFunc()"></it-box>
+    </div>
+    <template id="it_box">
+      <div style="height: 300px;width: 200px;background-color: aquamarine;">
+        <h1>我是子组件</h1>
+        <button @click="count++">点击了{{count}}次</button>
+        <button @click="btnClick()">点击</button>
+      </div>
+    </template>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const Box = {
+        data() {
+          return {
+            count: 0
+          }
+        },
+        methods: {
+          btnClick() {
+            alert("click")
+            this.$emit('box-click')
+          }
+        },
+        template: '#it_box'
+      }
+      const app = Vue.createApp({
+        data() {
+          return {}
+        },
+        methods: {
+          boxFunc() {
+            console.log("子组件按钮发生了点击")
+          }
+        },
+        components: {
+          "it-box": Box
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

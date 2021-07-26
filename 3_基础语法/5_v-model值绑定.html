@@ -1,74 +1,81 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <style type="text/css">
-    #v-model-select{
-      height: 30px;
-      width: 80px;
-    }
-  </style>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+      #v-model-select {
+        height: 30px;
+        width: 80px;
+      }
+    </style>
+  </head>
 
-<body>
-  <div id="app">
-    <!-- 单选框 -->
-    <input type="radio"  value="篮球" v-model="isSelected">
-    <label for="ball">篮球</label>
-    <input type="radio" value="足球" v-model="isSelected">
-    <label for="ball">足球</label>
-    <p>{{isSelected}}</p>
-    <p>=============</p>
-    <!-- 复选框 -->
-    <input type="checkbox" v-model="isAgree">
-    <label for="protocol">是否同意《共产党宣言》协议</label><br>
-    <button style="background-color:rgb(80, 165, 235); height: 30px " :disabled="!isAgree">下一步</button>
-    <p>=============</p>
-    <!-- 选择框 -->
-    <select name="plan" id="v-model-select" v-model="plan">
-      <label for="name">计划选择</label>
-      <option disabled value="请选择计划">请选择计划</option>
-      <option value="A计划">A计划</option>
-      <option value="B计划">B计划</option>
-      <option value="C计划">C计划</option>
-      <option value="D计划">D计划</option>
-    </select>
-    <label for="plab">选择了: {{ plan }}</label>
-    <p>=============</p>
-    <!-- 多选框 -->
-    <label for="fruit"></label>
-    <input name="fruit" type="checkbox" value="苹果" v-model="fruits">苹果
-    <input name="fruit" type="checkbox" value="西瓜" v-model="fruits">西瓜
-    <input name="fruit" type="checkbox" value="香蕉" v-model="fruits">香蕉
-    <input name="fruit" type="checkbox" value="土豆" v-model="fruits">土豆<br>
-    <label for="plab">喜欢吃的水果: {{ fruits }}</label>
-    <p>==============</p>
-    <!-- 值绑定v-model -->
-    <label :for="item" v-for="item in hobbies">
-      <input :id="item" type="checkbox" :value="item"  v-model="youHobbies">{{item}}
-    </label>
-    <label for="hobbies">你的爱好是：{{youHobbies}}</label>
-  </div>
-  <script src="../js/vue3.js"></script>
-  <script>
-  const app = Vue.createApp({
-    data() {
-        return {
-          isSelected: "篮球",
-          isAgree: false,
-          plan: "",
-          fruits: [],
-          hobbies: ["游泳", "烧烤", "麻将", "拳击"],
-          youHobbies: []
-        }
-    },
-    methods: {}
-    }).mount('#app')
-  </script>
-</body>
+  <body>
+    <div id="app">
+      <!-- 单选框 -->
+      <input type="radio" value="篮球" v-model="isSelected">
+      <label for="ball">篮球</label>
+      <input type="radio" value="足球" v-model="isSelected">
+      <label for="ball">足球</label>
+      <p>{{isSelected}}</p>
+      <p>=============</p>
+      <!-- 复选框 -->
+      <input type="checkbox" v-model="isAgree">
+      <label for="protocol">是否同意《共产党宣言》协议</label><br>
+      <button style="background-color:rgb(80, 165, 235); height: 30px " :disabled="!isAgree">下一步</button>
+      <p>=============</p>
+      <!-- 选择框 -->
+      <select name="plan" id="v-model-select" v-model="plan">
+        <label for="name">计划选择</label>
+        <option disabled value="请选择计划">请选择计划</option>
+        <option value="A计划">A计划</option>
+        <option value="B计划">B计划</option>
+        <option value="C计划">C计划</option>
+        <option value="D计划">D计划</option>
+      </select>
+      <label for="plab">选择了: {{ plan }}</label>
+      <p>=============</p>
+      <!-- 多选框 -->
+      <label for="fruit"></label>
+      <input name="fruit" type="checkbox" value="苹果" v-model="fruits">苹果
+      <input name="fruit" type="checkbox" value="西瓜" v-model="fruits">西瓜
+      <input name="fruit" type="checkbox" value="香蕉" v-model="fruits">香蕉
+      <input name="fruit" type="checkbox" value="土豆" v-model="fruits">土豆<br>
+      <label for="plab">喜欢吃的水果: {{ fruits }}</label>
+      <p>==============</p>
+      <!-- 值绑定v-model -->
+      <label :for="item" v-for="item in hobbies">
+        <input :id="item" type="checkbox" :value="item" v-model="youHobbies">{{item}}
+      </label>
+      <label for="hobbies">你的爱好是：{{youHobbies}}</label>
+      <p>==============</p>
+      <!-- v-model懒加载,失焦或者enter后才进行渲染 -->
+      <label for="lzay">
+        <input type="text" v-model.lazy="msgLazy">
+      </label>
+      <label for="show">懒加载内容:{{msgLazy}}</label>
+    </div>
+    <script src="../js/vue3.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            isSelected: "篮球",
+            isAgree: false,
+            plan: "",
+            fruits: [],
+            hobbies: ["游泳", "烧烤", "麻将", "拳击"],
+            youHobbies: [],
+            msgLazy: ''
+          }
+        },
+        methods: {}
+      }).mount('#app')
+    </script>
+  </body>
 
 </html>

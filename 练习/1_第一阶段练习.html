@@ -1,0 +1,129 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+      body {
+        text-align: center;
+        background-color: rgb(195, 222, 248);
+      }
+
+      input,
+      select {
+        margin: 2 2 10 2;
+        height: 30px;
+        width: 150px;
+        border: 1px solid rgb(195, 222, 248);
+        border-radius: 3px;
+      }
+
+      table {
+        width: 500px;
+        height: auto;
+        border: 1px solid rgb(122, 133, 143);
+        border-spacing: 0;
+        margin: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <div class="userInfo">
+        <label for="name">
+          姓名：
+          <input type="text" v-model="userInfo.name">
+        </label><br>
+        <label for="age">
+          年龄：
+          <input type="text" v-model.number="userInfo.age">
+        </label><br>
+        <label for="userInfo">
+          性别：
+          <select name="sex" id="sex" v-model="userInfo.sex">
+            <option value="男">男</option>
+            <option value="女">女</option>
+          </select>
+        </label><br>
+        <label for="phone">
+          手机：
+          <input type="text" v-model.number="userInfo.phone">
+        </label>
+        <button @click="addItem()">添加</button>
+      </div>
+      <div class="userInfo-table">
+        <table>
+          <thead>
+            <tr>
+              <td>序号</td>
+              <td>姓名</td>
+              <td>年龄</td>
+              <td>性别</td>
+              <td>手机号</td>
+              <td>操作</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in userInfoTable">
+              <td>{{ index +1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.age }}</td>
+              <td>{{ item.sex }}</td>
+              <td>{{ item.phone }}</td>
+              <td><button @click="delItem(index)">删除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            userInfo: {
+              name: '',
+              age: '',
+              sex: '',
+              phone: ''
+            },
+            userInfoTable: [{
+              name: '张三',
+              age: 25,
+              sex: '男',
+              phone: 13888888888
+            }]
+          }
+        },
+        methods: {
+          addItem() {
+            const {
+              name,
+              age,
+              sex,
+              phone
+            } = this.userInfo
+            if (!name || !age || !sex || !phone) {
+              alert("输入正确内容")
+              return
+            }
+            this.userInfoTable.push(this.userInfo) // js push方法，从数组尾部插入元素，unshift从头部插入元素
+            this.userInfo = {
+              name: '',
+              age: '',
+              sex: '',
+              phone: ''
+            }
+
+          },
+          delItem(index) {
+            return this.userInfoTable.splice(index, 1)
+          }
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

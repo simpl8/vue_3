@@ -1,0 +1,59 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <it-count></it-count>
+      <it-box></it-box>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      // 定义局部组件1
+      const Counter = {
+        data() {
+          return {
+            count: 0
+          }
+        },
+        template: `
+          <button @click="count++">点击了{{count}}次</button>
+        `
+      };
+      // 定义局部组件2
+      const Box = {
+        data() {
+
+        },
+        components: {
+          'c-counter': Counter
+        },
+        template: `
+          <div style="width: 300px; height: 200px; background-color: green;">
+            <h1>我是box</h1>
+            <it-count></it-count> <!--这里不能直接用局部组件1-->
+            <p>正确使用局部组件1</p>
+            <c-counter></c-counter>
+          </div>
+        `
+      }
+      const app = Vue.createApp({
+        data() {
+          return {}
+        },
+        // 组件选项 key-value形式，组件名称: 组件
+        components: {
+          'it-count': Counter,
+          'it-box': Box,
+        },
+        methods: {}
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

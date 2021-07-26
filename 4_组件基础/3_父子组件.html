@@ -1,0 +1,60 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <div id='app'>
+    <it-count></it-count>
+    <it-box></it-box>
+  </div>
+  <!-- 模板抽离出来 -->
+  <template id="it_count">
+    <button @click="count++">点击了{{count}}次</button>
+  </template>
+  <!-- 模板抽离出来 -->
+  <template id="it_box">
+    <div style="height: 300px; width: 200px; background-color: aquamarine;">
+      <label>我是第二个组件</label><br>
+      <!-- 使用子组件，即组件Count -->
+      <it_count />
+    </div>
+  </template>
+  <script src='../js/vue3.js'></script>
+  <script>
+    // 子组件
+    const Count = {
+      data() {
+        return {
+          count: 0
+        }
+      },
+      template: '#it_count'
+    }
+    //父组件
+    const Box = {
+      data() {
+
+      },
+      components: {
+        "it_count": Count
+      },
+      template: "#it_box"
+    }
+    const app = Vue.createApp({
+      data() {
+        return {}
+      },
+      components: {
+        "it-count": Count,
+        "it-box": Box
+      },
+      methods: {}
+    }).mount('#app')
+  </script>
+  </body>
+
+</html>

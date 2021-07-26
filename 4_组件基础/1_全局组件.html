@@ -1,0 +1,67 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <button-counter></button-counter>
+      <div class="first">
+        <button-counter></button-counter>
+      </div>
+      <c-counter></c-counter>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {}
+        },
+        methods: {}
+      })
+
+      // 定义全局组件
+      app.component('button-counter', {
+        data() {
+          return {
+            count: 0
+          }
+        },
+        template: `
+          <button @click="count++">
+            你点击了按钮：{{ count }}次
+          </button>
+        `
+      })
+      // 定义全局组件
+      app.component('c-counter', {
+        data() {
+          return {
+            counter: 0
+          }
+        },
+        template: `
+          <div>
+            <button @click="decreate()">-</button>
+            {{counter}}
+            <button @click="increate()">+</button>  
+          </div>
+        `,
+        methods: {
+          decreate() {
+            this.counter--
+          },
+          increate() {
+            this.counter++
+          }
+        }
+      })
+      app.mount('#app') // 挂载app
+    </script>
+  </body>
+
+</html>
