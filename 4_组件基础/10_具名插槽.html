@@ -1,0 +1,59 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <it-box>
+        <!-- v-slot: name使用具名插槽，插槽不能访问it-box的作用域，访问的是app的作用域 -->
+        <!-- 具名插槽简写v-slot=# -->
+        <template #footer>
+          <button>脚部按钮</button>
+        </template>
+        <template v-slot:header>
+          <a href="http:www.baidu.com">{{msg}}</a>
+        </template>
+        <template v-slot:main>
+          <a href="http:www.taobao.com">淘宝商城</a>
+        </template>
+      </it-box>
+    </div>
+    <template id='it_box'>
+      <div style="height: 300px;width: 300px;background-color: coral;">
+        <h1>具名插槽</h1>
+        <header>
+          <slot name="header">我是头</slot>
+        </header>
+        <main>
+          <slot name="main">我是内容</slot>
+        </main>
+        <footer>
+          <slot name="footer">我是脚</slot>
+        </footer>
+      </div>
+    </template>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const Box = {
+        template: "#it_box"
+      }
+      const app = Vue.createApp({
+        data() {
+          return {
+            msg: '百度一下'
+          }
+        },
+        methods: {},
+        components: {
+          'it-box': Box
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>
