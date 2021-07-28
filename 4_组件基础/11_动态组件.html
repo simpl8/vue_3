@@ -1,0 +1,69 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <!-- keep-alive标签缓存组件的信息 -->
+      <keep-alive>
+        <!-- 通过:is动态绑定组件名 -->
+        <component :is="isCp"></component>
+      </keep-alive>
+      
+      <button @click="change()">变化组件</button>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            isCp: 'button-comp'
+          }
+        },
+        methods: {
+          change() {
+            if (this.isCp === 'button-comp') {
+              this.isCp = 'input-comp'
+            } else {
+              this.isCp = 'button-comp'
+            }
+          }
+        },
+      })
+      app.component('button-comp', {
+        data() {
+          return {
+            count: 0
+          }
+        },
+        methods: {
+          decreate() {
+            return this.count --
+          },
+          increate() {
+            return this.count ++
+          }
+        },
+        template: `
+        <h1>我是计数器</h1>
+        <button @click="decreate()">-</button>
+          {{count}}
+          <button @click="increate()">+</button>
+        `
+      })
+      app.component('input-comp', {
+        template: `
+          <h1>我是输入框</h1>
+          <input type="text" placeholder="请输入内容" />
+        `
+      })
+      app.mount('#app')
+    </script>
+  </body>
+
+</html>
