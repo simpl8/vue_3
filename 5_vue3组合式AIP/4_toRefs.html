@@ -1,0 +1,36 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <h1>姓名-{{name}} 年龄-{{age}}</h1>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const app = Vue.createApp({
+        setup() {
+          const {reactive, toRefs} = Vue
+          let Obj = reactive({name: '张三', age: 15})
+          // 1, toRefs：解构Obj并且具有响应式能力
+          let {name, age} = toRefs(Obj)
+          setTimeout(() => {
+            name.value = '李四'
+            age.value = 25
+          }, 2000)
+          return {
+            name,
+            age
+          }
+
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

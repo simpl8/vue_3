@@ -1,0 +1,35 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      {{msg}}
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      // ! ref: 让基础类型的数据具备响应式
+      const app = Vue.createApp({
+        setup(props, context) {
+          // 1.引入ref
+          const {ref} = Vue
+          // 2.用ref()包裹时，底层通过proxy进行代理，proxy({value: 'Vue'})
+          let msg = ref('VUE3')
+          // 3.在实例中修改msg, ref包裹之后msg变成了proxy({value: 'Vue'})的对象，修改时通过msg.value进行引用
+          setTimeout(() => {
+            msg.value='React'
+          }, 2000)
+          return {
+            msg
+          }
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

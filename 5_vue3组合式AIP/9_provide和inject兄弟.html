@@ -1,0 +1,63 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <cp-a></cp-a>
+      <cp-b></cp-b>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      // A组件
+      const A = {
+        setup() {
+          const {ref, provide, readonly} = Vue;
+          let msg = ref("Hello")
+          provide('msg', readonly(msg))
+
+          return {
+            msg
+          }
+        },
+        template: `
+          <div>
+            <p>A组件原数据：{{msg}}</p>  
+          </div>
+        `
+      }
+
+      const B = {
+        setup() {
+          const {inject} = Vue
+          let msgs = inject('msg')
+
+          return {
+            msgs
+          }
+        },
+        template: `
+          <div>
+            <p>使用A组件的数据渲染：{{msgs}}</p>  
+          </div>
+        `
+      }
+
+      const app = Vue.createApp({
+        setup() {
+
+        },
+        components: {
+          'cp-a': A,
+          'cp-b': B
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

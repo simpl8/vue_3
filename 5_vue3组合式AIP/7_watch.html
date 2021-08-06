@@ -1,0 +1,45 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <input type="text" v-model='txt' placeholder="输入内容">
+      <p>输入的内容：{{txt}}</p>
+      <!-- 对象类型 -->
+      <input type="text" v-model='tObj.name' label="姓名" placeholder="输入姓名">
+      <p>输入的姓名: {{tObj.name}}</p>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const app = Vue.createApp({
+        setup() {
+          const {ref, reactive, watch} = Vue
+          let txt = ref('')
+          // 侦听器
+          watch(txt, (currentValue, preValue) => {
+            console.log("当前值:", currentValue)
+            console.log("之前值：", preValue)
+          })
+          // 侦听器侦听对象属性，传入的内容可以是个函数() => tObj.name
+          let tObj = reactive({name: "张三", age: 40})
+          watch(() => tObj.name, (currentValue, preValue) => {
+            console.log("现在", currentValue)
+            console.log("曾经", preValue)
+          })
+
+          return {
+            txt,
+            tObj
+          }
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,59 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <h1>{{msg}}</h1>
+      <button @click="change()">change</button>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            msg: "Hello"
+          }
+        },
+        methods: {
+          change() {
+            this.msg = "world"
+          }
+        },
+        // 1,生命周期函数beforeCreate()在创建组件实例之前自动调用
+        beforeCreate() {
+        console.log("beforeCreate()")
+        },
+        // 2,创建组件实例后自动执调用
+        created() {
+          console.log("created()");
+        },
+        // 3,在组件内容被渲染到页面之前调用
+        beforeMount() {
+          console.log("beforeMount()");
+        },
+        // 4,在组件内容被渲染到页面之后调用
+        mounted() {
+          console.log("mounted()");
+        },
+        // 5,beforeUpdate,组件数据发生改变时自动调用
+        beforeUpdate() {
+          console.log("beforeUpdate()");
+        },
+        // 6,updated,页面发生变化时调用
+        updated() {
+          console.log("updated()");
+        }
+      })
+      app.mount('#app')
+      
+      
+    </script>
+  </body>
+
+</html>

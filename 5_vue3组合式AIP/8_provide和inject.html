@@ -1,0 +1,64 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app' style="height:600; width:600; background-color: rgb(197, 47, 235)">
+      <cp-sun></cp-sun>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+
+      const cpSun = {
+        setup() {
+          const {inject} = Vue
+          // 订阅消息
+          const msgs = inject('msg')
+          // 订约的消息为function
+          const change = inject('changeMsg', (value1)=> {
+            changeMsg(value1)
+          })
+
+          return {
+            msgs,
+            change
+          }
+        },
+        template: `
+          <div style="height:300; width:300; background-color: blue">
+            <p>{{msgs}}</p>  
+            <button @click="change('hello')">Change</button>
+          </div>
+        `
+      }
+
+      const app = Vue.createApp({
+        setup() {
+          const {ref, reactive, provide, readonly} = Vue;
+          let msg = ref('张三')
+
+          const changeMsg = (value1)=> {
+            msg.value=value1
+          }
+          // 发布消息
+          provide('msg', msg)
+          provide('changeMsg', changeMsg)
+
+          return {
+            msg,
+            changeMsg
+          }
+        },
+        components: {
+          'cp-sun': cpSun
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,37 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <h1>姓名:{{name}} 性别：{{sex}} 年龄：{{age}}</h1>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      const app = Vue.createApp({
+        setup(props, context) {
+          const {toRef, toRefs, reactive} = Vue
+          let Obj = reactive({name: '鱿鱼须', sex: '女'})
+          let {name, sex} = toRefs(Obj)
+          let age = toRef(Obj, 'age') // age：可选传递属性，用toRef()包裹
+          setTimeout(() => {
+            name.value = 'VUE'
+            sex.value = '男'
+            age.value = 100
+          }, 2000)
+          return {
+            name,
+            sex,
+            age
+          }
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>

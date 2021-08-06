@@ -1,0 +1,40 @@
+<html>
+
+  <head>
+    <meta charset='UTF-8'>
+    <title></title>
+    <style type='text/css'>
+    </style>
+  </head>
+
+  <body>
+    <div id='app'>
+      <h1>姓名：{{Obj.name}} == 性别：{{Obj.sex}}</h1>
+      <ul>
+        <li v-for="item in List">{{item}}</li>
+      </ul>
+    </div>
+    <script src='../js/vue3.js'></script>
+    <script>
+      // ! reactive: 让引用类型的数据具备响应式
+      const app = Vue.createApp({
+        setup(props, context) {
+          // 1.引入reactive
+          const {reactive} = Vue
+          // 2.用reactive()包裹数，时期具备响应式
+          let Obj = reactive({name: "苏杭", sex: '女'})
+          let List = reactive(['Vue', 'React'])
+          setTimeout(() => {
+            Obj.name = '郭邦璐'
+            Obj.sex = '男'
+          }, 2000)
+          return {
+            Obj, List
+          }
+         
+        }
+      }).mount('#app')
+    </script>
+  </body>
+
+</html>
